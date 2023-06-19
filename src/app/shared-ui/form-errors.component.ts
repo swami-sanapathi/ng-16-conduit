@@ -14,5 +14,5 @@ import { Component, Input } from '@angular/core';
     imports: [NgFor, NgIf]
 })
 export class FormErrors {
-    @Input() errors!: string[] | null;
+    @Input() errors!: string[];
 }

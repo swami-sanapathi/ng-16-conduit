@@ -2,39 +2,39 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs';
+import { User } from 'src/app/models/User';
+import { SessionStorage } from 'src/app/shared/data-access/session-storage';
+import { destroyNotifier } from 'src/app/shared/destroy/destroyNotifier';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { ErrorService } from 'src/app/shared/services/errors.service';
-import { User } from '../../models/User';
-import { AuthService } from '../../shared/services/auth.service';
-import { SessionStorage } from '../../shared/data-access/session-storage';
-import { destroyNotifier } from '../../shared/destroy/destroyNotifier';
 
 @Injectable()
-export class SignupService {
+export class LoginService {
     readonly #http = inject(HttpClient);
+    readonly errorService = inject(ErrorService);
     readonly #storage = inject(SessionStorage);
-    readonly authService = inject(AuthService);
-    readonly #errorService = inject(ErrorService);
+    readonly #authService = inject(AuthService);
     readonly #router = inject(Router);
 
-    readonly destory = destroyNotifier();
+    destory = destroyNotifier();
 
-    signup(registedUser: User) {
+    login(user: User) {
         this.#http
-            .post('/users', { user: registedUser })
+            .post('/users/login', { user })
             .pipe(takeUntil(this.destory))
             .subscribe({
                 next: (response: any) => {
                     console.log('response -->', response);
-                    const { user, token, username } = response.user;
+                    const { token, username } = response.user;
                     this.#storage.setItem('token', token);
                     this.#storage.setItem('username', username);
                     this.#storage.setItem('user', response.user);
-                    this.authService.user.set(response.user);
-                    this.authService.authStatus.set(true);
+                    this.#authService.user.set(response.user);
+                    this.#authService.authStatus.set(true);
                     this.#router.navigate(['/']);
                 },
-                error: ({ error }) => {
-                    this.#errorService.setErrors(error.errors);
+                error: (error) => {
+                    this.errorService.setErrors(error.errors);
                 }
             });
     }

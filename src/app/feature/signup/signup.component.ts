@@ -1,8 +1,12 @@
+import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { ErrorService } from 'src/app/shared/services/errors.service';
 import { FormErrors } from '../../shared-ui/form-errors.component';
 import { FormLayout } from '../../shared-ui/form-layout.component';
-import { Signup } from './signup.service';
+import { AuthService } from '../../shared/services/auth.service';
+import { SignupService } from './signup.service';
 
 @Component({
     standalone: true,
@@ -10,10 +14,10 @@ import { Signup } from './signup.service';
         <app-form-layout class="auth-page" contentClass="col-md-6 offset-md-3 col-xs-12">
             <h1 class="text-xs-center">Sign up</h1>
             <p class="text-xs-center">
-                <a href="">Have an account?</a>
+                <a routerLink="/login">Have an account?</a>
             </p>
 
-            <app-form-error></app-form-error>
+            <app-form-error *ngIf="errorService.errors().length > 0" [errors]="errorService.errors()" />
 
             <form [formGroup]="signupForm" (ngSubmit)="signup()">
                 <fieldset class="form-group">
@@ -46,17 +50,18 @@ import { Signup } from './signup.service';
         </app-form-layout>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ReactiveFormsModule, FormLayout, FormErrors],
-    providers: [Signup]
+    imports: [ReactiveFormsModule, FormLayout, FormErrors, NgIf, RouterLink],
+    providers: [SignupService, AuthService, ErrorService]
 })
-export default class SignupComponent {
+export default class Signup {
     signupForm = inject(NonNullableFormBuilder).group({
         username: ['', [Validators.required]],
         email: ['', [Validators.email, Validators.required]],
         password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]]
     });
 
-    signupService = inject(Signup);
+    signupService = inject(SignupService);
+    errorService = inject(ErrorService);
 
     signup() {
         console.log(this.signupForm.getRawValue());

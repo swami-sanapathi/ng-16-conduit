@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { SESSION_STORAGE } from '../di/storage';
 
-Injectable();
+Injectable({ providedIn: 'root' });
 export class SessionStorage {
     ss = inject(SESSION_STORAGE);
 
@@ -36,5 +36,9 @@ export class SessionStorage {
         } else {
             this.ss.setItem(key, value);
         }
+    }
+
+    clear() {
+        this.ss?.clear();
     }
 }
