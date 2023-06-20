@@ -1,21 +1,12 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { User } from 'src/app/models/User';
-import { SessionStorage } from '../data-access/session-storage';
+import { SessionStorageService } from '../data-access/session-storage';
 
 Injectable();
 export class AuthService {
-    storage = inject(SessionStorage);
+    storage = inject(SessionStorageService);
 
     authStatus = signal<boolean>(false);
-    isAuthenticated = computed(() => {
-        console.log(this.authStatus());
-        console.log(this.storage.getItem('token'));
-
-        return (
-            this.authStatus() ||
-            !['undefined', 'null', null, undefined].includes(this.storage.getItem('token')) ||
-            false
-        );
-    });
+    readonly isAuthenticated = computed(() => this.authStatus());
     user = signal<User | null>(null);
 }

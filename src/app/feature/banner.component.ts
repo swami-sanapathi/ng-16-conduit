@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-banner',
@@ -10,8 +10,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
                 <p>A place to share your knowledge.</p>
             </div>
         </div>
-    `,
-
-    changeDetection: ChangeDetectionStrategy.OnPush
+    `
 })
 export class BannerComponent {}

@@ -1,13 +1,11 @@
 import { NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
     selector: 'app-header',
     standalone: true,
-    imports: [RouterLink, RouterLinkActive, NgIf],
-    providers: [AuthService],
     template: `
         <nav class="navbar navbar-light">
             <div class="container">
@@ -24,7 +22,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
                             Home
                         </a>
                     </li>
-                    <ng-container *ngIf="authService.isAuthenticated(); else nonAuthenticated">
+                    <ng-container *ngIf="isAuthenticated; else nonAuthenticated">
                         <li class="nav-item">
                             <a
                                 class="nav-link"
@@ -74,8 +72,9 @@ import { AuthService } from 'src/app/shared/services/auth.service';
             </div>
         </nav>
     `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    imports: [RouterLink, RouterLinkActive, NgIf],
+    providers: [AuthService]
 })
 export class HeaderComponent {
-    readonly authService = inject(AuthService);
+    @Input({ required: true }) isAuthenticated = false;
 }

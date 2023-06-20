@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { SESSION_STORAGE } from '../di/storage';
 
 Injectable({ providedIn: 'root' });
-export class SessionStorage {
+export class SessionStorageService {
     ss = inject(SESSION_STORAGE);
 
     getItem(key: string) {

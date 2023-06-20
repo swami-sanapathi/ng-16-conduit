@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { SessionStorage } from 'src/app/shared/data-access/session-storage';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { SettingsService } from './settings.service';
 
 @Component({
     standalone: true,
@@ -41,7 +40,9 @@ import { AuthService } from 'src/app/shared/services/auth.service';
                             </fieldset>
                         </form>
                         <hr />
-                        <button class="btn btn-outline-danger" (click)="logout()">Or click here to logout.</button>
+                        <button class="btn btn-outline-danger" (click)="settingsService.logout()">
+                            Or click here to logout.
+                        </button>
                     </div>
                 </div>
             </div>
@@ -51,18 +52,5 @@ import { AuthService } from 'src/app/shared/services/auth.service';
     providers: [AuthService]
 })
 export default class SettingsComponent {
-    #storage = inject(SessionStorage);
-    #router = inject(Router);
-    #authService = inject(AuthService);
-    readonly cdr = inject(ChangeDetectorRef)
-
-    logout() {
-        this.#authService.authStatus.set(false);
-        console.log(this.#authService.authStatus());
-        
-        this.#authService.user.set(null);
-        this.#storage.clear();
-        this.#router.navigate(['/']);
-        this.cdr.detectChanges();
-    }
+    settingsService = inject(SettingsService);
 }

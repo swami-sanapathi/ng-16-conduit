@@ -5,13 +5,13 @@ import { takeUntil } from 'rxjs';
 import { ErrorService } from 'src/app/shared/services/errors.service';
 import { User } from '../../models/User';
 import { AuthService } from '../../shared/services/auth.service';
-import { SessionStorage } from '../../shared/data-access/session-storage';
+import { SessionStorageService } from '../../shared/data-access/session-storage';
 import { destroyNotifier } from '../../shared/destroy/destroyNotifier';
 
 @Injectable()
 export class SignupService {
     readonly #http = inject(HttpClient);
-    readonly #storage = inject(SessionStorage);
+    readonly #storage = inject(SessionStorageService);
     readonly authService = inject(AuthService);
     readonly #errorService = inject(ErrorService);
     readonly #router = inject(Router);

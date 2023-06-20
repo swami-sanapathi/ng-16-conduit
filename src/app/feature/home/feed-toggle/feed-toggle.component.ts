@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
     standalone: true,
@@ -14,8 +14,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angul
                 </li>
             </ul>
         </div>
-    `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    `
 })
 export class FeedToggleComponent {
     @Output() changeFeed = new EventEmitter();

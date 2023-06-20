@@ -1,5 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Article } from 'src/app/models/Article';
 import { ArticlePreviewComponent } from '../article-preview/article-preview.component';
 
@@ -14,7 +14,6 @@ import { ArticlePreviewComponent } from '../article-preview/article-preview.comp
             <app-article-preview>Loading...</app-article-preview>
         </ng-template>
     `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [NgIf, NgFor, ArticlePreviewComponent]
 })
 export class ArticleListComponent {
