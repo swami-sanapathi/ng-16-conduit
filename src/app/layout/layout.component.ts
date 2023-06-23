@@ -19,6 +19,7 @@ export default class LayoutComponent implements OnInit {
     authService = inject(AuthService);
 
     ngOnInit(): void {
+        console.log(this.authService.isAuthenticated());
         console.log('ChangeDetectionStrategy.OnPush', this.authService.isAuthenticated());
     }
 }

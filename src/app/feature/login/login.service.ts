@@ -2,11 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs';
-import { User } from 'src/app/models/User';
-import { SessionStorageService } from 'src/app/shared/data-access/session-storage';
-import { destroyNotifier } from 'src/app/shared/destroy/destroyNotifier';
-import { AuthService } from 'src/app/shared/services/auth.service';
-import { ErrorService } from 'src/app/shared/services/errors.service';
+import { User } from '../../models/User';
+import { SessionStorageService } from '../../shared/data-access/session-storage';
+import { destroyNotifier } from '../../shared/destroy/destroyNotifier';
+import { AuthService } from '../../shared/services/auth.service';
+import { ErrorService } from '../../shared/services/errors.service';
 
 @Injectable()
 export class LoginService {
@@ -25,25 +25,16 @@ export class LoginService {
             .subscribe({
                 next: (response: any) => {
                     console.log('response -->', response);
-                    const { token, username } = response.user;
-                    console.log('before set .isAuthenticated', this.authService.isAuthenticated());
+                    const { token } = response.user;
                     this.authService.user.set(response.user);
-                    this.authService.authStatus.set(true);
-                    console.log('after set .isAuthenticated', this.authService.isAuthenticated());
+                    this.authService.authStatus.set('authenticated');
                     this.#storage.setItem('token', token);
-                    this.#storage.setItem('username', username);
                     this.#storage.setItem('user', response.user);
-                    // this.#router.navigate(['/']);
-                    this.authenticate();
+                    this.authService.navigateToHome();
                 },
                 error: (error) => {
                     this.errorService.setErrors(error.errors);
                 }
             });
-    }
-
-    authenticate(urlSegments: string[] = ['/']) {
-        // this.refresh();
-        void this.#router.navigate(urlSegments);
     }
 }

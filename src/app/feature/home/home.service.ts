@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { EMPTY, catchError, takeUntil } from 'rxjs';
-import { Article } from 'src/app/models/model';
-import { destroyNotifier } from 'src/app/shared/destroy/destroyNotifier';
+import { Article } from '../../models/model';
+import { destroyNotifier } from '../../shared/destroy/destroyNotifier';
 
 @Injectable()
 export class HomeService {

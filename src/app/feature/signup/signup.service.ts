@@ -1,12 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs';
-import { ErrorService } from 'src/app/shared/services/errors.service';
 import { User } from '../../models/User';
-import { AuthService } from '../../shared/services/auth.service';
 import { SessionStorageService } from '../../shared/data-access/session-storage';
 import { destroyNotifier } from '../../shared/destroy/destroyNotifier';
+import { AuthService } from '../../shared/services/auth.service';
+import { ErrorService } from '../../shared/services/errors.service';
 
 @Injectable()
 export class SignupService {
@@ -14,7 +13,6 @@ export class SignupService {
     readonly #storage = inject(SessionStorageService);
     readonly authService = inject(AuthService);
     readonly #errorService = inject(ErrorService);
-    readonly #router = inject(Router);
 
     readonly destory = destroyNotifier();
 
@@ -25,13 +23,11 @@ export class SignupService {
             .subscribe({
                 next: (response: any) => {
                     console.log('response -->', response);
-                    const { user, token, username } = response.user;
+                    const { token } = response.user;
                     this.#storage.setItem('token', token);
-                    this.#storage.setItem('username', username);
                     this.#storage.setItem('user', response.user);
                     this.authService.user.set(response.user);
-                    this.authService.authStatus.set(true);
-                    this.#router.navigate(['/']);
+                    this.authService.authStatus.set('authenticated');
                 },
                 error: ({ error }) => {
                     this.#errorService.setErrors(error.errors);

@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { Article } from 'src/app/models/Article';
+import { Article } from '../../../models/Article';
 
 @Component({
     standalone: true,

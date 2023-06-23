@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { takeUntil } from 'rxjs';
-import { destroyNotifier } from 'src/app/shared/destroy/destroyNotifier';
+import { destroyNotifier } from '../../../shared/destroy/destroyNotifier';
 
 @Injectable()
 export class TagsServcie {

@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import { SessionStorageService } from 'src/app/shared/data-access/session-storage';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { SessionStorageService } from '../../shared/data-access/session-storage';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Injectable()
 export class SettingsService {
@@ -8,8 +8,7 @@ export class SettingsService {
     #authService = inject(AuthService);
 
     logout() {
-        this.#authService.authStatus.set(false);
+        this.#authService.authStatus.set('unauthenticated');
         this.#authService.user.set(null);
-        this.#storage.clear();
     }
 }

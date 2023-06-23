@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { AuthService } from 'src/app/shared/services/auth.service';
-import { ErrorService } from 'src/app/shared/services/errors.service';
 import { FormErrors } from '../../shared-ui/form-errors.component';
+import { ErrorService } from '../../shared/services/errors.service';
 import { LoginService } from './login.service';
 
 @Component({
@@ -46,7 +45,7 @@ import { LoginService } from './login.service';
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [FormErrors, ReactiveFormsModule, RouterLink],
-    providers: [LoginService, ErrorService, AuthService]
+    providers: [LoginService, ErrorService]
 })
 export default class LoginComponent {
     loginForm = inject(NonNullableFormBuilder).group({

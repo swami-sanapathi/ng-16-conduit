@@ -1,7 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
     selector: 'app-header',
@@ -19,7 +19,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
                             routerLinkActive="active"
                             [routerLinkActiveOptions]="{ exact: true }"
                         >
-                            Home {{isAuthenticated}}
+                            Home
                         </a>
                     </li>
                     <ng-container *ngIf="isAuthenticated; else nonAuthenticated">

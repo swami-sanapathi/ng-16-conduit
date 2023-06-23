@@ -2,7 +2,7 @@ import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { ErrorService } from 'src/app/shared/services/errors.service';
+import { ErrorService } from '../../shared/services/errors.service';
 import { FormErrors } from '../../shared-ui/form-errors.component';
 import { FormLayout } from '../../shared-ui/form-layout.component';
 import { AuthService } from '../../shared/services/auth.service';

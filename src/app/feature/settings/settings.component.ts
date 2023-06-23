@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { AuthService } from 'src/app/shared/services/auth.service';
 import { SettingsService } from './settings.service';
 
 @Component({
@@ -49,7 +48,7 @@ import { SettingsService } from './settings.service';
         </div>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [AuthService]
+    providers: [SettingsService]
 })
 export default class SettingsComponent {
     settingsService = inject(SettingsService);
