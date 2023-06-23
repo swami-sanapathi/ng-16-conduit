@@ -1,5 +1,5 @@
 import { Injectable, computed, signal } from '@angular/core';
-import { User } from 'src/app/models/User';
+import { User } from '../../models/User';
 // import { SessionStorageService } from '../data-access/session-storage';
 
 @Injectable()
