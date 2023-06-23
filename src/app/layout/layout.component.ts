@@ -5,7 +5,6 @@ import { HeaderComponent } from '../common/header/header.component';
 import { AuthService } from '../shared/services/auth.service';
 
 @Component({
-    selector: 'app-layout',
     standalone: true,
     template: `
         <app-header [isAuthenticated]="authService.isAuthenticated()" />
@@ -14,12 +13,12 @@ import { AuthService } from '../shared/services/auth.service';
     `,
     providers: [AuthService],
     imports: [RouterOutlet, HeaderComponent, FooterComponent],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class LayoutComponent implements OnInit {
     authService = inject(AuthService);
 
     ngOnInit(): void {
-        console.log('ChangeDetectionStrategy.OnPush');
+        console.log('ChangeDetectionStrategy.OnPush', this.authService.isAuthenticated());
     }
 }

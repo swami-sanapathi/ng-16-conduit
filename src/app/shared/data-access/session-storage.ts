@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { SESSION_STORAGE } from '../di/storage';
 
-Injectable({ providedIn: 'root' });
+@Injectable({ providedIn: 'root' })
 export class SessionStorageService {
     ss = inject(SESSION_STORAGE);
 

@@ -19,7 +19,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
                             routerLinkActive="active"
                             [routerLinkActiveOptions]="{ exact: true }"
                         >
-                            Home
+                            Home {{isAuthenticated}}
                         </a>
                     </li>
                     <ng-container *ngIf="isAuthenticated; else nonAuthenticated">
