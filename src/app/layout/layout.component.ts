@@ -11,7 +11,6 @@ import { AuthService } from '../shared/services/auth.service';
         <router-outlet />
         <app-footer />
     `,
-    providers: [AuthService],
     imports: [RouterOutlet, HeaderComponent, FooterComponent],
     changeDetection: ChangeDetectionStrategy.OnPush
 })

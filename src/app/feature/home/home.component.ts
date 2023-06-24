@@ -26,7 +26,7 @@ import { TagsServcie } from './tags/tag.service';
             </div>
         </div>
     `,
-    // changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [BannerComponent, ArticleListComponent, TagsComponent, FeedToggleComponent],
     providers: [HomeService, TagsServcie]
 })

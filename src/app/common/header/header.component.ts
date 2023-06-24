@@ -73,7 +73,6 @@ import { AuthService } from '../../shared/services/auth.service';
         </nav>
     `,
     imports: [RouterLink, RouterLinkActive, NgIf],
-    providers: [AuthService]
 })
 export class HeaderComponent {
     @Input({ required: true }) isAuthenticated = false;
