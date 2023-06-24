@@ -15,7 +15,6 @@ export class TagsServcie {
             .get('/tags')
             .pipe(takeUntil(this.destory))
             .subscribe((response: any) => {
-                console.log('tags -->', response);
                 this.#tags.set(response.tags);
             });
     }

@@ -8,26 +8,34 @@ export class AuthService {
     storage = inject(SessionStorageService);
     #router = inject(Router);
 
-    authStatus = signal<'authenticated' | 'unauthenticated'>('unauthenticated');
-    isAuthenticated = computed(() => {
-        if (this.authStatus() === 'authenticated') {
-            return true;
-        }
-
-        this.refresh();
-        return false;
-    });
     user = signal<User | null>(null);
+    authStatus = signal<'authenticated' | 'unauthenticated'>('unauthenticated');
+    readonly isAuthenticated = computed(() => {
+        console.log('authStatus --> original', this.authStatus(), this.authStatus() === 'authenticated');
 
-    refresh() {
+        return this.authStatus() === 'authenticated' || false;
+    });
+
+    async refresh() {
         const token = this.storage.getItem('token');
-        if (token) {
-            this.storage.clear();
+        if (!token) {
+            this.authStatus.set('unauthenticated');
+            this.user.set(null);
+            return;
         }
-        this.navigateToHome();
+
+        this.authStatus.set('authenticated');
+        console.log('refresh 1-->', this.isAuthenticated());
+        return;
     }
 
     navigateToHome(urlSegments: string[] = ['/']) {
-        void this.#router.navigate(urlSegments);
+        this.refresh().then(() => {
+            console.log('refresh 2-->', this.isAuthenticated());
+
+            this.#router.navigate(urlSegments);
+        });
+
+        console.log('refresh 3-->', this.isAuthenticated());
     }
 }

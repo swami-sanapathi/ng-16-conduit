@@ -8,7 +8,7 @@ export class SettingsService {
     #authService = inject(AuthService);
 
     logout() {
-        this.#authService.authStatus.set('unauthenticated');
-        this.#authService.user.set(null);
+        this.#storage.clear();
+        this.#authService.refresh();
     }
 }

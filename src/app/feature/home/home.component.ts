@@ -4,7 +4,7 @@ import { ArticleListComponent } from './article-list/article-list.component';
 import { FeedToggleComponent } from './feed-toggle/feed-toggle.component';
 import { HomeService } from './home.service';
 import { TagsComponent } from './tags/tags.component';
-import { TagsServcie } from './tags/tas.service';
+import { TagsServcie } from './tags/tag.service';
 
 @Component({
     standalone: true,

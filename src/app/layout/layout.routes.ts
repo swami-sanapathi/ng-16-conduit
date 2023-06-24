@@ -1,24 +1,29 @@
 import { Routes } from '@angular/router';
+import { authGuard } from '../shared/services/auth.guard';
 
 export default [
     {
         path: '',
-        loadComponent: () => import('../feature/home/home.component'),
+        loadComponent: () => import('../feature/home/home.component')
     },
     {
         path: 'new-article',
-        loadComponent: () => import('../feature/create-article/create-article.component'),
+        canMatch: [authGuard('protected')],
+        loadComponent: () => import('../feature/create-article/create-article.component')
     },
     {
         path: 'settings',
-        loadComponent: () => import('../feature/settings/settings.component'),
+        canMatch: [authGuard('protected')],
+        loadComponent: () => import('../feature/settings/settings.component')
     },
     {
         path: 'login',
-        loadComponent: () => import('../feature/login/login.component'),
+        canMatch: [authGuard('unprotected')],
+        loadComponent: () => import('../feature/login/login.component')
     },
     {
         path: 'signup',
-        loadComponent: () => import('../feature/signup/signup.component'),
-    },
+        canMatch: [authGuard('unprotected')],
+        loadComponent: () => import('../feature/signup/signup.component')
+    }
 ] as Routes;

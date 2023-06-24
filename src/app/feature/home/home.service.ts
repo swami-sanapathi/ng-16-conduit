@@ -21,7 +21,6 @@ export class HomeService {
                 catchError((error) => EMPTY)
             )
             .subscribe((response: any) => {
-                console.log('data -->', response);
                 this.#articles.set(response.articles);
             });
     }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from '../common/footer/footer.component';
 import { HeaderComponent } from '../common/header/header.component';
@@ -13,13 +13,8 @@ import { AuthService } from '../shared/services/auth.service';
     `,
     providers: [AuthService],
     imports: [RouterOutlet, HeaderComponent, FooterComponent],
-    // changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export default class LayoutComponent implements OnInit {
+export default class LayoutComponent {
     authService = inject(AuthService);
-
-    ngOnInit(): void {
-        console.log(this.authService.isAuthenticated());
-        console.log('ChangeDetectionStrategy.OnPush', this.authService.isAuthenticated());
-    }
 }
