@@ -10,11 +10,7 @@ export class AuthService {
 
     user = signal<User | null>(null);
     authStatus = signal<'authenticated' | 'unauthenticated'>('unauthenticated');
-    readonly isAuthenticated = computed(() => {
-        console.log('authStatus --> original', this.authStatus(), this.authStatus() === 'authenticated');
-
-        return this.authStatus() === 'authenticated' || false;
-    });
+    readonly isAuthenticated = computed(() => this.authStatus() === 'authenticated' || false);
 
     async refresh() {
         const token = this.storage.getItem('token');
@@ -25,17 +21,10 @@ export class AuthService {
         }
 
         this.authStatus.set('authenticated');
-        console.log('refresh 1-->', this.isAuthenticated());
         return;
     }
 
     navigateToHome(urlSegments: string[] = ['/']) {
-        this.refresh().then(() => {
-            console.log('refresh 2-->', this.isAuthenticated());
-
-            this.#router.navigate(urlSegments);
-        });
-
-        console.log('refresh 3-->', this.isAuthenticated());
+        this.refresh().then(() => this.#router.navigate(urlSegments));
     }
 }

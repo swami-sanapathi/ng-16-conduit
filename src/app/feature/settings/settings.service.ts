@@ -9,6 +9,6 @@ export class SettingsService {
 
     logout() {
         this.#storage.clear();
-        this.#authService.refresh();
+        this.#authService.navigateToHome();
     }
 }

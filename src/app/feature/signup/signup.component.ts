@@ -63,7 +63,6 @@ export default class Signup {
     errorService = inject(ErrorService);
 
     signup() {
-        console.log(this.signupForm.getRawValue());
         this.signupService.signup(this.signupForm.getRawValue());
     }
 }

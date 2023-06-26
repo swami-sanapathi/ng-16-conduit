@@ -22,7 +22,6 @@ export class SignupService {
             .pipe(takeUntil(this.destory))
             .subscribe({
                 next: (response: any) => {
-                    console.log('response -->', response);
                     const { token } = response.user;
                     this.#storage.setItem('token', token);
                     this.#storage.setItem('user', response.user);
