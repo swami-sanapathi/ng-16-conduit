@@ -16,9 +16,7 @@ import { LoginService } from './login.service';
                         <p class="text-xs-center">
                             <a routerLink="/signup">Need an account?</a>
                         </p>
-
                         <app-form-error [errors]="errorService.errors()" />
-
                         <form [formGroup]="loginForm" (ngSubmit)="loginService.login(loginForm.getRawValue())">
                             <fieldset class="form-group">
                                 <input
