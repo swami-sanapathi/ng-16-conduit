@@ -3,6 +3,7 @@ import { ApplicationConfig } from '@angular/core';
 import { provideRouter, withHashLocation } from '@angular/router';
 import { provideApiConfig } from './shared/di/url';
 import { provideApiUrl } from './shared/interceptors/apiUrl';
+import { provideToken } from './shared/interceptors/token.interceptor';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -17,6 +18,6 @@ export const appConfig: ApplicationConfig = {
             ],
             withHashLocation()
         ),
-        provideHttpClient(withInterceptors([provideApiUrl()]))
+        provideHttpClient(withInterceptors([provideApiUrl(), provideToken()]))
     ]
 };

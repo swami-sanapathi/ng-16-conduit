@@ -26,7 +26,7 @@ export class SignupService {
                     this.#storage.setItem('token', token);
                     this.#storage.setItem('user', response.user);
                     this.authService.user.set(response.user);
-                    this.authService.authStatus.set('authenticated');
+                    this.authService.isAuthenticated.set(true);
                 },
                 error: ({ error }) => {
                     this.#errorService.setErrors(error.errors);

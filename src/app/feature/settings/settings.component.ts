@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { SessionStorageService } from 'src/app/shared/data-access/session-storage';
 import { SettingsService } from './settings.service';
 
 @Component({
@@ -50,6 +52,22 @@ import { SettingsService } from './settings.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [SettingsService]
 })
-export default class SettingsComponent {
+export default class SettingsComponent implements OnInit {
     settingsService = inject(SettingsService);
+    storage = inject(SessionStorageService);
+
+    settingsForm = inject(FormBuilder).nonNullable.group({
+        image: ['', [Validators.required]],
+        username: ['', [Validators.required]],
+        bio: ['', [Validators.required]],
+        email: ['', [Validators.required]],
+        password: ['', [Validators.required]]
+    });
+
+    ngOnInit(): void {
+        const user = this.storage.getItem('user') as any;
+        if (user) {
+            this.settingsForm.patchValue(user);
+        }
+    }
 }
