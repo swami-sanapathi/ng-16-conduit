@@ -6,6 +6,8 @@ export class ErrorService {
     errors = this.#errors.asReadonly();
 
     setErrors(errors: Record<string, string[]>) {
+        console.log(errors);
+        
         this.#errors.set(processErrors(errors));
     }
 }

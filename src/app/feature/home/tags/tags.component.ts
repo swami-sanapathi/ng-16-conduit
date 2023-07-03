@@ -8,8 +8,11 @@ import { Component, Input } from '@angular/core';
         <div class="sidebar">
             <p>Popular Tags</p>
             <div class="tag-list">
-                <ng-container *ngIf="tags.length > 0; else loading">
-                    <a class="tag-pill tag-default" *ngFor="let tag of tags">{{ tag }}</a>
+                <ng-container *ngIf="status !== 'loading'; else loading">
+                    <ng-container *ngIf="tags.length > 0; else noTags">
+                        <a class="tag-pill tag-default" *ngFor="let tag of tags">{{ tag }}</a>
+                    </ng-container>
+                    <ng-template #noTags>No tags available.</ng-template>
                 </ng-container>
                 <ng-template #loading>Loading...</ng-template>
             </div>
@@ -19,4 +22,5 @@ import { Component, Input } from '@angular/core';
 })
 export class TagsComponent {
     @Input() tags!: string[];
+    @Input() status!: string;
 }

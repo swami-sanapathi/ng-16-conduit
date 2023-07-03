@@ -16,7 +16,6 @@ import { AuthService } from '../shared/services/auth.service';
 })
 export default class LayoutComponent implements OnInit {
     ngOnInit(): void {
-        this.authService.refresh();
     }
     authService = inject(AuthService);
 }

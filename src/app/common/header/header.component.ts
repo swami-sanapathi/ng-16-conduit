@@ -1,7 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
     selector: 'app-header',
@@ -72,7 +71,7 @@ import { AuthService } from '../../shared/services/auth.service';
             </div>
         </nav>
     `,
-    imports: [RouterLink, RouterLinkActive, NgIf],
+    imports: [RouterLink, RouterLinkActive, NgIf]
 })
 export class HeaderComponent {
     @Input({ required: true }) isAuthenticated = false;

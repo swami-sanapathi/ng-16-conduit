@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AuthService } from './shared/services/auth.service';
 
 @Component({
     selector: 'app-root',
@@ -9,6 +10,11 @@ import { RouterOutlet } from '@angular/router';
         <router-outlet />
     `
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     title = 'ng-16-conduit';
+    readonly #authService = inject(AuthService);
+
+    ngOnInit(): void {
+        this.#authService.refresh();
+    }
 }

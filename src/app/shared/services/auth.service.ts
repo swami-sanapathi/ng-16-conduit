@@ -25,6 +25,7 @@ export class AuthService {
         this.#http.get('/user').subscribe({
             next: (res: any) => {
                 this.storage.setItem('user', JSON.stringify(res.user));
+                this.user.set(res.user);
             },
             error: (err) => EMPTY
         });

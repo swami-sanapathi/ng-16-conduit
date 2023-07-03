@@ -28,7 +28,7 @@ export class LoginService {
                     this.#authService.navigateToHome();
                 },
                 error: (error) => {
-                    this.errorService.setErrors(error.errors);
+                    this.errorService.setErrors(error.error.errors);
                 }
             });
     }
