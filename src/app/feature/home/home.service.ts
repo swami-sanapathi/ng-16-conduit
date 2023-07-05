@@ -36,7 +36,7 @@ export class HomeService {
                 catchError((error) => EMPTY)
             )
             .subscribe({
-                next: ({ articles }: { articles: Article[] }) => {
+                next: ({ articles }) => {
                     this.#articles.set(articles);
                     this.#status.set('success');
                 },
@@ -55,7 +55,7 @@ export class HomeService {
                 catchError((error) => EMPTY)
             )
             .subscribe({
-                next: ({ articles }: { articles: Article[] }) => {
+                next: ({ articles }) => {
                     this.#articles.set(articles);
                     this.#status.set('success');
                 },

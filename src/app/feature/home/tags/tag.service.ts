@@ -21,7 +21,7 @@ export class TagsServcie {
             .get<{ tags: string[] }>('/tags')
             .pipe(takeUntil(this.destory))
             .subscribe({
-                next: ({ tags }: { tags: string[] }) => {
+                next: ({ tags }) => {
                     this.#tags.set(tags);
                     this.#status.set('success');
                 },
