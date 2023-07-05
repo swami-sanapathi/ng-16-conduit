@@ -1,5 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
     standalone: true,
@@ -10,7 +10,7 @@ import { Component, Input } from '@angular/core';
             <div class="tag-list">
                 <ng-container *ngIf="status !== 'loading'; else loading">
                     <ng-container *ngIf="tags.length > 0; else noTags">
-                        <a class="tag-pill tag-default" *ngFor="let tag of tags">{{ tag }}</a>
+                        <a class="tag-pill tag-default" *ngFor="let tag of tags" (click)="selectedTag.emit(tag)">{{ tag }}</a>
                     </ng-container>
                     <ng-template #noTags>No tags available.</ng-template>
                 </ng-container>
@@ -23,4 +23,6 @@ import { Component, Input } from '@angular/core';
 export class TagsComponent {
     @Input() tags!: string[];
     @Input() status!: string;
+
+    @Output() selectedTag = new EventEmitter<string>();
 }

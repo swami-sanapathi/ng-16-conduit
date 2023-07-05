@@ -19,14 +19,16 @@ import { TagsComponent } from './tags/tags.component';
                         <app-feed-toggle
                             [isFeedDisabled]="!authService.isAuthenticated()"
                             [changeFeed]="homeService.feedType()"
+                            [selectTag]="homeService.tag()"
                             (selectFeed)="homeService.getArticle('FEED')"
                             (selectGlobal)="homeService.getArticle('GLOBAL')"
+                            
                         />
                         <app-article-list [articles]="homeService.articles()" [status]="homeService.status()" />
                     </div>
 
                     <div class="col-md-3">
-                        <app-tags [tags]="tagsService.tags()" [status]="tagsService.status()" />
+                        <app-tags [tags]="tagsService.tags()" [status]="tagsService.status()" (selectedTag)="homeService.getArticle('TAG', $event)"/>
                     </div>
                 </div>
             </div>

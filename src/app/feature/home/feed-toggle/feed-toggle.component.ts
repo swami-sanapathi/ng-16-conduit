@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
@@ -9,7 +10,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
                 <li class="nav-item">
                     <a
                         class="nav-link"
-                        [class.active]="changeFeed === 'FEED'"
+                        [class.active]="changeFeed === 'FEED' && !selectTag"
                         [class.disabled]="isFeedDisabled"
                         (click)="!isFeedDisabled && selectFeed.emit()"
                     >
@@ -17,20 +18,29 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [class.active]="changeFeed === 'GLOBAL'" (click)="selectGlobal.emit()">
+                    <a
+                        class="nav-link"
+                        [class.active]="changeFeed === 'GLOBAL' && !selectTag"
+                        (click)="selectGlobal.emit()"
+                    >
                         Global Feed
                     </a>
                 </li>
+                <li class="nav-item" *ngIf="selectTag">
+                    <a class="nav-link active" (click)="selectGlobal.emit()">#{{ selectTag }}</a>
+                </li>
             </ul>
         </div>
-    `
+    `,
+    imports: [NgIf]
 })
 export class FeedToggleComponent {
-    @Input() isFeedDisabled: boolean = true;
-    @Input() changeFeed: FeedType = 'GLOBAL';
+    @Input({ required: true }) isFeedDisabled: boolean = true;
+    @Input({ required: true }) changeFeed: FeedType = 'GLOBAL';
+    @Input({ required: true }) selectTag!: string;
 
     @Output() selectFeed = new EventEmitter();
     @Output() selectGlobal = new EventEmitter();
 }
 
-export type FeedType = 'GLOBAL' | 'FEED';
+export type FeedType = 'GLOBAL' | 'FEED' | 'TAG';

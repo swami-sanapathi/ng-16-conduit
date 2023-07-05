@@ -10,23 +10,27 @@ export class HomeService {
     #articles = signal<Article[]>([]);
     #status = signal<ApiStatus>('loading');
     #feedType = signal<FeedType>('GLOBAL');
+    #selectTag = signal<string>('');
     #http = inject(HttpClient);
     destroyRef = destroyNotifier();
 
     articles = this.#articles.asReadonly();
     feedType = this.#feedType.asReadonly();
     status = this.#status.asReadonly();
+    tag = this.#selectTag.asReadonly();
 
-    getArticle(articleType: FeedType) {
+    getArticle(articleType: FeedType, tag?: string) {
         this.destroyRef.next();
         this.#status.set('loading');
         this.#feedType.set(articleType);
-        articleType === 'GLOBAL' ? this.globalArticles() : this.favouriteFeed();
+        this.#selectTag.set(tag || '');
+        articleType !== 'FEED' ? this.globalArticles(tag) : this.favouriteFeed();
     }
 
-    globalArticles() {
+    globalArticles(selecteTag?: string) {
+        const params = (selecteTag && { params: { tag: selecteTag || '' } }) || undefined;
         this.#http
-            .get<{ articles: Article[] }>('/articles')
+            .get<{ articles: Article[] }>('/articles', params)
             .pipe(
                 takeUntil(this.destroyRef),
                 catchError((error) => EMPTY)
