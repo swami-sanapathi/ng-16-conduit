@@ -28,6 +28,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 ### TODO
+- view article & add comment to the post, follow, favourite options
+- add article & profile at header 
 - add `NgRx` component store
 - tests using jest
 - i18n
