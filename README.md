@@ -33,3 +33,21 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - add `NgRx` component store
 - tests using jest
 - i18n
+
+
+
+###### Org Project Migrations
+> Standalone Migartion
+- @auth0/angular-jwt angular 15 support available
+    [with modules support](https://github.com/auth0/angular2-jwt/pull/772/files) 
+    - standalone migration not yet available [discussion](https://github.com/auth0/angular2-jwt/issues/770#issuecomment-1535894033)
+
+- @azure/msal-angular [with modules support](https://github.com/AzureAD/microsoft-authentication-library-for-js/issues/5988)
+    - standalone migration not yet available [discussion](https://github.com/AzureAD/microsoft-authentication-library-for-js/issues/5988)
+
+- @balkangraph/orgchart.js [with modules support also not available](https://github.com/BALKANGraph/OrgChartJS/issues/768) 
+    - opened an issue
+    - standalone migration not yet available [discussion](https://github.com/BALKANGraph/OrgChartJS/issues/768)
+
+- @fullcalendar/angular angular 15 support available
+    - [open issue](https://github.com/fullcalendar/fullcalendar/issues/7395)
