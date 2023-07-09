@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
     title = 'ng-16-conduit';
     readonly #authService = inject(AuthService);
 
-    ngOnInit(): void {
+    ngOnInit() {
         this.#authService.refresh();
     }
 }

@@ -1,5 +1,6 @@
 import { NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Article } from '../../../models/Article';
 
 @Component({
@@ -9,17 +10,22 @@ import { Article } from '../../../models/Article';
         <div class="article-preview">
             <ng-container *ngIf="article; else loading">
                 <div class="article-meta">
-                    <a href="profile.html"><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
+                    <a [routerLink]="['/profile', article.author.username]"><img [src]="article.author.image" /></a>
                     <div class="info">
-                        <a href="" class="author">{{ article.author.username }}</a>
+                        <a class="author" [routerLink]="['/profile', article.author.username]">{{ article.author.username }}</a>
                         <span class="date">{{ article.updatedAt }}</span>
                     </div>
-                    <button class="btn btn-outline-primary btn-sm pull-xs-right">
+                    <button
+                        class="btn btn-sm pull-xs-right"
+                        [class.btn-primary]="article.favorited"
+                        [class.btn-outline-primary]="!article.favorited"
+                        (click)="onToggle.emit(article)"
+                    >
                         <i class="ion-heart"></i>
                         {{ article.favoritesCount }}
                     </button>
                 </div>
-                <a href="" class="preview-link">
+                <a class="preview-link" [routerLink]="['/article', article.slug]">
                     <h1>{{ article.title }}</h1>
                     <p>{{ article.description }}</p>
                     <span>Read more...</span>
@@ -30,8 +36,9 @@ import { Article } from '../../../models/Article';
             </ng-template>
         </div>
     `,
-    imports: [NgIf]
+    imports: [NgIf, RouterLink]
 })
 export class ArticlePreviewComponent {
     @Input() article!: Article;
+    @Output() onToggle = new EventEmitter<Article>();
 }

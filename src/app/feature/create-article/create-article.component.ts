@@ -1,6 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CreateArticleService } from './create-article.service';
 
 @Component({
     standalone: true,
@@ -9,7 +10,7 @@ import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } 
             <div class="container page">
                 <div class="row">
                     <div class="col-md-10 offset-md-1 col-xs-12">
-                        <form [formGroup]="form" (ngSubmit)="form.valid && submit()">
+                        <form [formGroup]="form" (ngSubmit)="newArticleService.publishArticle(form.getRawValue())">
                             <fieldset>
                                 <fieldset class="form-group">
                                     <input
@@ -43,11 +44,8 @@ import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } 
                                         #tagInput
                                         (keyup.enter)="addTag(tagInput)"
                                     />
-                                    <div class="tag-list" *ngIf="form.get('tagList')?.value?.length">
-                                        <span
-                                            class="tag-pill tag-default"
-                                            *ngFor="let tag of form.get('tagList')?.value"
-                                        >
+                                    <div class="tag-list" *ngIf="tags.length">
+                                        <span class="tag-pill tag-default" *ngFor="let tag of tags">
                                             <i class="ion-close-round" (click)="removeTag(tag)"></i>
                                             {{ ' ' + tag }}
                                         </span>
@@ -68,27 +66,35 @@ import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } 
         </div>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ReactiveFormsModule, NgFor, NgIf]
+    imports: [ReactiveFormsModule, NgFor, NgIf],
+    providers: [CreateArticleService]
 })
 export default class CreateArticleComponent {
+    newArticleService = inject(CreateArticleService);
+
     form = inject(NonNullableFormBuilder).group({
-        title: ['', [Validators.required, Validators.minLength(3)]],
-        description: ['', [Validators.required, Validators.minLength(3)]],
-        body: ['', [Validators.required, Validators.minLength(3)]],
+        title: ['', [Validators.required]],
+        description: ['', [Validators.required]],
+        body: ['', [Validators.required]],
         tagList: new FormControl<string[]>([], [Validators.required])
     });
 
-    addTag(tag: HTMLInputElement) {
-        if (!tag?.value) return;
+    tags: string[] = [];
 
-        this.form.value.tagList?.push(tag.value);
+    addTag(tag: HTMLInputElement) {
+        if (!tag?.value?.trim()) return;
+
+        // Don't push the same tag twice
+        if (this.tags?.includes(tag.value)) return;
+        this.tags?.push(tag.value);
+        this.form.patchValue({ tagList: this.tags });
+
+        tag.value = '';
+        return;
     }
 
     removeTag(tag: string) {
-        this.form.value.tagList = this.form?.value?.tagList?.filter((t) => t !== tag);
-    }
-
-    submit() {
-        console.log(this.form.getRawValue());
+        this.tags = this.tags?.filter((t) => t !== tag);
+        this.form.patchValue({ tagList: this.tags });
     }
 }

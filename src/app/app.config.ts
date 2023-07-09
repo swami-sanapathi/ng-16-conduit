@@ -1,6 +1,6 @@
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter, withHashLocation } from '@angular/router';
+import { provideRouter, withComponentInputBinding, withHashLocation } from '@angular/router';
 import { provideApiConfig } from './shared/di/url';
 import { provideApiUrl } from './shared/interceptors/apiUrl';
 import { provideToken } from './shared/interceptors/token.interceptor';
@@ -16,7 +16,8 @@ export const appConfig: ApplicationConfig = {
                     loadChildren: () => import('./layout/layout.routes')
                 }
             ],
-            withHashLocation()
+            withHashLocation(),
+            withComponentInputBinding()
         ),
         provideHttpClient(withInterceptors([provideApiUrl(), provideToken()]))
     ]

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { EMPTY } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { User } from '../../models/User';
 import { SessionStorageService } from '../data-access/session-storage';
 
@@ -13,24 +13,23 @@ export class AuthService {
 
     user = signal<User | null>(null);
     isAuthenticated = signal<boolean>(false);
+    #status = signal<'idle' | 'authenticated' | 'unauthenticated'>('idle');
+    isAuthenticating = computed(() => this.#status() === 'idle');
 
     async refresh() {
         const token = this.storage.getItem('token');
         if (!token) {
             this.isAuthenticated.set(false);
             this.user.set(null);
+            this.#status.set('unauthenticated');
             return;
         }
 
-        this.#http.get('/user').subscribe({
-            next: (res: any) => {
-                this.storage.setItem('user', JSON.stringify(res.user));
-                this.user.set(res.user);
-            },
-            error: (err) => EMPTY
-        });
-
+        const response: { user: User } = await firstValueFrom(this.#http.get<{ user: User }>('/user'));
+        this.storage.setItem('user', JSON.stringify(response.user));
+        this.user.set(response.user);
         this.isAuthenticated.set(true);
+        this.#status.set('authenticated');
         return;
     }
 

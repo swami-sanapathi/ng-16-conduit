@@ -93,7 +93,8 @@
               "browserTarget": "ng-16-conduit:build:production"
             },
             "development": {
-              "browserTarget": "ng-16-conduit:build:development"
+              "browserTarget": "ng-16-conduit:build:development",
+              "hmr": true
             }
           },
           "defaultConfiguration": "development"

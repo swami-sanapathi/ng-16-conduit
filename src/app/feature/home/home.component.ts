@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { ArticleToggleService } from 'src/app/shared/services/article-toggle.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { BannerComponent } from '../banner.component';
 import { ArticleListComponent } from './article-list/article-list.component';
@@ -22,13 +23,21 @@ import { TagsComponent } from './tags/tags.component';
                             [selectTag]="homeService.tag()"
                             (selectFeed)="homeService.getArticle('FEED')"
                             (selectGlobal)="homeService.getArticle('GLOBAL')"
-                            
                         />
-                        <app-article-list [articles]="homeService.articles()" [status]="homeService.status()" />
+                        <app-article-list
+                            [articles]="homeService.articles()"
+                            [status]="homeService.status()"
+                            (test)="toggleWorks($event)"
+                            />
+                            <!-- (articleToggle)="homeService.toggleArticle($event)" -->
                     </div>
 
                     <div class="col-md-3">
-                        <app-tags [tags]="tagsService.tags()" [status]="tagsService.status()" (selectedTag)="homeService.getArticle('TAG', $event)"/>
+                        <app-tags
+                            [tags]="tagsService.tags()"
+                            [status]="tagsService.status()"
+                            (selectedTag)="homeService.getArticle('TAG', $event)"
+                        />
                     </div>
                 </div>
             </div>
@@ -36,7 +45,7 @@ import { TagsComponent } from './tags/tags.component';
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [BannerComponent, ArticleListComponent, TagsComponent, FeedToggleComponent],
-    providers: [HomeService, TagsServcie]
+    providers: [HomeService, TagsServcie, ArticleToggleService]
 })
 export default class HomeComponent implements OnInit {
     homeService = inject(HomeService);
@@ -46,5 +55,10 @@ export default class HomeComponent implements OnInit {
     ngOnInit(): void {
         this.homeService.getArticle('GLOBAL');
         this.tagsService.getTags();
+    }
+
+    toggleWorks(event: any) {
+        console.log(event);
+        
     }
 }

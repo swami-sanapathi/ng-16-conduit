@@ -1,5 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Article } from '../../../models/Article';
 import { ArticlePreviewComponent } from '../article-preview/article-preview.component';
 
@@ -9,7 +9,11 @@ import { ArticlePreviewComponent } from '../article-preview/article-preview.comp
     template: `
         <ng-container *ngIf="status !== 'loading'; else loading">
             <ng-container *ngIf="articles.length > 0; else noArticles">
-                <app-article-preview *ngFor="let article of articles" [article]="article" />
+                <app-article-preview
+                    *ngFor="let article of articles"
+                    [article]="article"
+                    (onToggle)="onToggle.emit($event)"
+                />
             </ng-container>
 
             <ng-template #noArticles>
@@ -25,4 +29,6 @@ import { ArticlePreviewComponent } from '../article-preview/article-preview.comp
 export class ArticleListComponent {
     @Input({ required: true }) articles!: Article[];
     @Input({ required: true }) status!: string;
+
+    @Output('articleToggle') onToggle = new EventEmitter<Article>();
 }

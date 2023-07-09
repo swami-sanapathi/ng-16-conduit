@@ -1,6 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { User } from 'src/app/models/User';
 
 @Component({
     selector: 'app-header',
@@ -44,6 +45,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                                 &nbsp;Settings
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/profile', user?.username]">
+                                <img [src]="user?.image" class="user-pic" />
+                                {{ user?.username }}
+                            </a>
+                        </li>
                     </ng-container>
                     <ng-template #nonAuthenticated>
                         <li class="nav-item">
@@ -75,4 +82,5 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class HeaderComponent {
     @Input({ required: true }) isAuthenticated = false;
+    @Input({ required: true }) user!: User | null;
 }
