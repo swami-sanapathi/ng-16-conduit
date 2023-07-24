@@ -51,3 +51,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 - @fullcalendar/angular angular 15 support available
     - [open issue](https://github.com/fullcalendar/fullcalendar/issues/7395)
+ 
+
+
+###### Notes
+> Reactivity
+    - which monitors the changes in the application state and updates the UI accordingly.
+> 
