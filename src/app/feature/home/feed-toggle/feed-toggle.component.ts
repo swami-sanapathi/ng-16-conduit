@@ -26,9 +26,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
                         Global Feed
                     </a>
                 </li>
-                <li class="nav-item" *ngIf="selectTag">
+                @if (selectTag) {
+<li class="nav-item">
                     <a class="nav-link active" (click)="selectGlobal.emit()">#{{ selectTag }}</a>
                 </li>
+}
             </ul>
         </div>
     `,

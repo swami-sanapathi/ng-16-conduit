@@ -15,7 +15,8 @@ import { Article } from '../models/Article';
                 </a>
                 <span class="date">{{ article?.createdAt | date : 'mediumDate' }}</span>
             </div>
-            <ng-container *ngIf="isOwner; else nonOwner">
+            @if (isOwner) {
+
                 <a class="btn btn-outline-secondary btn-sm" [routerLink]="['/new-article', article?.slug]">
                     <i class="ion-edit"></i>
                     Edit Article
@@ -24,13 +25,16 @@ import { Article } from '../models/Article';
                     <i class="ion-trash-a"></i>
                     Delete Article
                 </button>
-            </ng-container>
-            <ng-template #nonOwner>
+            
+} @else {
+
                 <button class="btn btn-sm btn-outline-secondary action-btn" >
                     <i class="ion-plus-round"></i>
                     Follow {{ article?.author?.username }}
                 </button>
-            </ng-template>
+            
+}
+            
             &nbsp;&nbsp;
             <button class="btn btn-sm btn-outline-primary">
                 <i class="ion-heart"></i>

@@ -16,7 +16,9 @@ import { SignupService } from './signup.service';
                 <a routerLink="/login">Have an account?</a>
             </p>
 
-            <app-form-error *ngIf="errorService.errors().length > 0" [errors]="errorService.errors()" />
+            @if (errorService.errors().length > 0) {
+<app-form-error [errors]="errorService.errors()" />
+}
 
             <form [formGroup]="signupForm" (ngSubmit)="signup()">
                 <fieldset class="form-group">

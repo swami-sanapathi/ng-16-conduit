@@ -44,12 +44,16 @@ import { CreateArticleService } from './create-article.service';
                                         #tagInput
                                         (keyup.enter)="addTag(tagInput)"
                                     />
-                                    <div class="tag-list" *ngIf="tags.length">
-                                        <span class="tag-pill tag-default" *ngFor="let tag of tags">
+                                    @if (tags.length) {
+<div class="tag-list">
+                                        @for (tag of tags; track tag) {
+  <span class="tag-pill tag-default">
                                             <i class="ion-close-round" (click)="removeTag(tag)"></i>
                                             {{ ' ' + tag }}
                                         </span>
+}
                                     </div>
+}
                                 </fieldset>
                                 <button
                                     class="btn btn-lg pull-xs-right btn-primary"

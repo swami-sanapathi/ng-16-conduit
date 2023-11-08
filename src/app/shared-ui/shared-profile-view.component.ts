@@ -16,18 +16,22 @@ import { User } from '../models/User';
                         <p>
                             {{ profile.bio }}
                         </p>
-                        <ng-container *ngIf="isOwner; else nonOwner">
+                        @if (isOwner) {
+
                             <button class="btn btn-sm btn-outline-secondary action-btn" routerLink="/settings">
                                 <i class="ion-gear-a"></i>
                                 Edit Profile Settings
                             </button>
-                        </ng-container>
-                        <ng-template #nonOwner>
+                        
+} @else {
+
                             <button class="btn btn-sm btn-outline-secondary action-btn">
                                 <i class="ion-plus-round"></i>
                                 &nbsp; Follow {{ profile.username }}
                             </button>
-                        </ng-template>
+                        
+}
+                        
                     </div>
                 </div>
             </div>
