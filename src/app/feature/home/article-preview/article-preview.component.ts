@@ -8,7 +8,8 @@ import { Article } from '../../../models/Article';
     selector: 'app-article-preview',
     template: `
         <div class="article-preview">
-            <ng-container *ngIf="article; else loading">
+            @if (article) {
+
                 <div class="article-meta">
                     <a [routerLink]="['/profile', article.author.username]"><img [src]="article.author.image" /></a>
                     <div class="info">
@@ -30,10 +31,13 @@ import { Article } from '../../../models/Article';
                     <p>{{ article.description }}</p>
                     <span>Read more...</span>
                 </a>
-            </ng-container>
-            <ng-template #loading>
+            
+} @else {
+
                 <ng-content></ng-content>
-            </ng-template>
+            
+}
+            
         </div>
     `,
     imports: [NgIf, RouterLink]

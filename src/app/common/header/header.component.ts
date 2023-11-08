@@ -22,7 +22,8 @@ import { User } from 'src/app/models/User';
                             Home
                         </a>
                     </li>
-                    <ng-container *ngIf="isAuthenticated; else nonAuthenticated">
+                    @if (isAuthenticated) {
+
                         <li class="nav-item">
                             <a
                                 class="nav-link"
@@ -51,8 +52,9 @@ import { User } from 'src/app/models/User';
                                 {{ user?.username }}
                             </a>
                         </li>
-                    </ng-container>
-                    <ng-template #nonAuthenticated>
+                    
+} @else {
+
                         <li class="nav-item">
                             <a
                                 class="nav-link"
@@ -73,7 +75,9 @@ import { User } from 'src/app/models/User';
                                 Sign up
                             </a>
                         </li>
-                    </ng-template>
+                    
+}
+                    
                 </ul>
             </div>
         </nav>

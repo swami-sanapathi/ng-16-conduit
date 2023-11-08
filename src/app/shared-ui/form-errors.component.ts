@@ -5,11 +5,15 @@ import { Component, Input } from '@angular/core';
     selector: 'app-form-error',
     standalone: true,
     template: `
-        <ng-container *ngIf="errors?.length">
+        @if (errors?.length) {
+
             <ul class="error-messages">
-                <li *ngFor="let error of errors">{{ error }}</li>
+                @for (error of errors; track error) {
+  <li>{{ error }}</li>
+}
             </ul>
-        </ng-container>
+        
+}
     `,
     imports: [NgFor, NgIf]
 })
