@@ -90,11 +90,11 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ng-16-conduit:build:production"
+              "buildTarget": "ng-16-conduit:build:production"
             },
             "development": {
-              "browserTarget": "ng-16-conduit:build:development",
-              "hmr": true
+              "hmr": true,
+              "buildTarget": "ng-16-conduit:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -102,7 +102,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng-16-conduit:build"
+            "buildTarget": "ng-16-conduit:build"
           }
         },
         "test": {
