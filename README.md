@@ -1,40 +1,66 @@
 # Real world application built with angular version 17 (Signals)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.5.
+## Description
 
-## Development server
+This is a real-world application built with Angular version 17. The application allows users to view articles, add comments to posts, follow other users, and mark articles as favorites. It also includes a header with options to add articles and view user profiles.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Installation
+To install and set up the project, follow these steps:
 
-## Code scaffolding
+1. Clone the repository:
+    ```bash
+    git clone <repository-url>
+    ```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+2. Navigate to the project directory:
+    ```bash
+    cd ng-signals-conduit
+    ```
 
-## Build
+3. Install the dependencies:
+    ```bash
+    npm install
+    ```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+4. Start the development server:
+    ```bash
+    ng serve
+    ```
 
-## Running unit tests
+5. Open your browser and visit `http://localhost:4200` to view the application.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Installation
+To install and set up the project, follow these steps:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   ```
 
-## Further help
+2. Navigate to the project directory:
+   ```bash
+   cd ng-signals-conduit
+   ```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+3. Install the dependencies:
+   ```bash
+   npm install
+   ```
 
+4. Start the development server:
+   ```bash
+   ng serve
+   ```
+
+5. Open your browser and visit `http://localhost:4200` to view the application.
 
 ### TODO
-- view article & add comment to the post, follow, favourite options
+- view article & add comment to the post, follow, favorite options
 - add article & profile at header 
-- add `NgRx` component store
+- add `@ngrx/signals` store
 - tests using jest
 - i18n
-
-
 
 ###### Org Project Migrations
 > Standalone Migartion
@@ -51,10 +77,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 - @fullcalendar/angular angular 15 support available
     - [open issue](https://github.com/fullcalendar/fullcalendar/issues/7395)
- 
-
 
 ###### Notes
 > Reactivity
     - which monitors the changes in the application state and updates the UI accordingly.
-> 
