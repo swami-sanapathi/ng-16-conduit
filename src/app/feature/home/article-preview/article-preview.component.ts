@@ -9,11 +9,12 @@ import { Article } from '../../../models/Article';
     template: `
         <div class="article-preview">
             @if (article) {
-
                 <div class="article-meta">
                     <a [routerLink]="['/profile', article.author.username]"><img [src]="article.author.image" /></a>
                     <div class="info">
-                        <a class="author" [routerLink]="['/profile', article.author.username]">{{ article.author.username }}</a>
+                        <a class="author" [routerLink]="['/profile', article.author.username]">
+                            {{ article.author.username }}
+                        </a>
                         <span class="date">{{ article.updatedAt }}</span>
                     </div>
                     <button
@@ -31,13 +32,9 @@ import { Article } from '../../../models/Article';
                     <p>{{ article.description }}</p>
                     <span>Read more...</span>
                 </a>
-            
-} @else {
-
+            } @else {
                 <ng-content></ng-content>
-            
-}
-            
+            }
         </div>
     `,
     imports: [NgIf, RouterLink]

@@ -4,6 +4,6 @@ export const routes: Routes = [
     {
         path: '',
         loadComponent: () => import('./layout/layout.component'),
-        loadChildren: () => import('./layout/layout.routes'),
-    },
+        loadChildren: () => import('./layout/layout.routes')
+    }
 ];

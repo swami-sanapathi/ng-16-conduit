@@ -27,10 +27,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
                     </a>
                 </li>
                 @if (selectTag) {
-<li class="nav-item">
-                    <a class="nav-link active" (click)="selectGlobal.emit()">#{{ selectTag }}</a>
-                </li>
-}
+                    <li class="nav-item">
+                        <a class="nav-link active" (click)="selectGlobal.emit()">#{{ selectTag }}</a>
+                    </li>
+                }
             </ul>
         </div>
     `,

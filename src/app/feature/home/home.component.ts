@@ -28,8 +28,8 @@ import { TagsComponent } from './tags/tags.component';
                             [articles]="homeService.articles()"
                             [status]="homeService.status()"
                             (test)="toggleWorks($event)"
-                            />
-                            <!-- (articleToggle)="homeService.toggleArticle($event)" -->
+                        />
+                        <!-- (articleToggle)="homeService.toggleArticle($event)" -->
                     </div>
 
                     <div class="col-md-3">
@@ -59,6 +59,5 @@ export default class HomeComponent implements OnInit {
 
     toggleWorks(event: any) {
         console.log(event);
-        
     }
 }

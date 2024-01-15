@@ -17,21 +17,16 @@ import { User } from '../models/User';
                             {{ profile.bio }}
                         </p>
                         @if (isOwner) {
-
                             <button class="btn btn-sm btn-outline-secondary action-btn" routerLink="/settings">
                                 <i class="ion-gear-a"></i>
                                 Edit Profile Settings
                             </button>
-                        
-} @else {
-
+                        } @else {
                             <button class="btn btn-sm btn-outline-secondary action-btn">
                                 <i class="ion-plus-round"></i>
                                 &nbsp; Follow {{ profile.username }}
                             </button>
-                        
-}
-                        
+                        }
                     </div>
                 </div>
             </div>

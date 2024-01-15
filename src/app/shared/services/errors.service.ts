@@ -7,7 +7,7 @@ export class ErrorService {
 
     setErrors(errors: Record<string, string[]>) {
         console.log(errors);
-        
+
         this.#errors.set(processErrors(errors));
     }
 }

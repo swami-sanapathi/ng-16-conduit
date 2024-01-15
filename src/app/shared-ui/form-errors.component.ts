@@ -6,14 +6,12 @@ import { Component, Input } from '@angular/core';
     standalone: true,
     template: `
         @if (errors?.length) {
-
             <ul class="error-messages">
                 @for (error of errors; track error) {
-  <li>{{ error }}</li>
-}
+                    <li>{{ error }}</li>
+                }
             </ul>
-        
-}
+        }
     `,
     imports: [NgFor, NgIf]
 })

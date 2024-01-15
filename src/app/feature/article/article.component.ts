@@ -8,9 +8,7 @@ import { ArticleService } from './article.service';
     standalone: true,
     template: `
         @if (articleService.status() !== 'loading') {
-
             @if (articleService.article(); as article) {
-
                 <div class="article-page">
                     <div class="banner">
                         <div class="container">
@@ -24,17 +22,14 @@ import { ArticleService } from './article.service';
                             <div class="col-md-12">
                                 <div class="body" [innerHTML]="article?.body"></div>
                                 @if (article.tagList.length > 0) {
-<ul class="tag-list">
-                                    @for (tag of article.tagList; track tag) {
-  <li
-                                        class="tag-default tag-pill tag-outline ng-binding ng-scope"
-                                       
-                                    >
-                                        {{ tag }}
-                                    </li>
-}
-                                </ul>
-}
+                                    <ul class="tag-list">
+                                        @for (tag of article.tagList; track tag) {
+                                            <li class="tag-default tag-pill tag-outline ng-binding ng-scope">
+                                                {{ tag }}
+                                            </li>
+                                        }
+                                    </ul>
+                                }
                             </div>
                         </div>
 
@@ -99,14 +94,10 @@ import { ArticleService } from './article.service';
                         </div>
                     </div>
                 </div>
-            
-}
-        
-} @else {
-
+            }
+        } @else {
             <p>Article loading..</p>
-        
-}
+        }
         <ng-template #loading>
             <p>Article loading..</p>
         </ng-template>

@@ -17,8 +17,8 @@ import { SignupService } from './signup.service';
             </p>
 
             @if (errorService.errors().length > 0) {
-<app-form-error [errors]="errorService.errors()" />
-}
+                <app-form-error [errors]="errorService.errors()" />
+            }
 
             <form [formGroup]="signupForm" (ngSubmit)="signup()">
                 <fieldset class="form-group">

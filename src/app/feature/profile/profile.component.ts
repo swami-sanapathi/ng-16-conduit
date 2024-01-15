@@ -10,7 +10,6 @@ import { ProfileService } from './profile.service';
     standalone: true,
     template: `
         @if (profileService.status() !== 'loading') {
-
             <div class="profile-page">
                 <app-shared-profile-view
                     [isOwner]="profileService.isOwner()"
@@ -27,10 +26,9 @@ import { ProfileService } from './profile.service';
                     </div>
                 </div>
             </div>
-        
-} @else {
-Loading...
-}
+        } @else {
+            Loading...
+        }
         <ng-template #loading>Loading...</ng-template>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,

@@ -45,15 +45,15 @@ import { CreateArticleService } from './create-article.service';
                                         (keyup.enter)="addTag(tagInput)"
                                     />
                                     @if (tags.length) {
-<div class="tag-list">
-                                        @for (tag of tags; track tag) {
-  <span class="tag-pill tag-default">
-                                            <i class="ion-close-round" (click)="removeTag(tag)"></i>
-                                            {{ ' ' + tag }}
-                                        </span>
-}
-                                    </div>
-}
+                                        <div class="tag-list">
+                                            @for (tag of tags; track tag) {
+                                                <span class="tag-pill tag-default">
+                                                    <i class="ion-close-round" (click)="removeTag(tag)"></i>
+                                                    {{ ' ' + tag }}
+                                                </span>
+                                            }
+                                        </div>
+                                    }
                                 </fieldset>
                                 <button
                                     class="btn btn-lg pull-xs-right btn-primary"

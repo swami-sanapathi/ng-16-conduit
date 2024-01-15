@@ -22,12 +22,12 @@ export default [
     {
         path: 'profile/:username',
         canMatch: [authGuard('protected')],
-        loadChildren: () => import('../feature/profile/profile.routes'),
+        loadChildren: () => import('../feature/profile/profile.routes')
     },
     {
         path: 'article/:slug',
         canMatch: [authGuard('protected')],
-        loadComponent: () => import('../feature/article/article.component'),
+        loadComponent: () => import('../feature/article/article.component')
     },
     {
         path: 'login',
@@ -40,6 +40,5 @@ export default [
         canMatch: [authGuard('unprotected')],
         loadComponent: () => import('../feature/signup/signup.component'),
         title: 'Signup'
-    },
-   
+    }
 ] as Routes;

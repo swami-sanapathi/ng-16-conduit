@@ -71,7 +71,7 @@ export class HomeService {
 
     async toggleArticle(article: Article) {
         console.log(article, 'article -->');
-        
+
         const response: Article = article.favorited
             ? await this.#toggleService.unFavArticle(article)
             : await this.#toggleService.favArticle(article);

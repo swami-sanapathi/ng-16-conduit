@@ -23,7 +23,6 @@ import { User } from 'src/app/models/User';
                         </a>
                     </li>
                     @if (isAuthenticated) {
-
                         <li class="nav-item">
                             <a
                                 class="nav-link"
@@ -52,9 +51,7 @@ import { User } from 'src/app/models/User';
                                 {{ user?.username }}
                             </a>
                         </li>
-                    
-} @else {
-
+                    } @else {
                         <li class="nav-item">
                             <a
                                 class="nav-link"
@@ -75,9 +72,7 @@ import { User } from 'src/app/models/User';
                                 Sign up
                             </a>
                         </li>
-                    
-}
-                    
+                    }
                 </ul>
             </div>
         </nav>
